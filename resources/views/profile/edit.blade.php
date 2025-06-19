@@ -1,29 +1,36 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+@section('content')
+<div class="container mt-5">
+    <h2>Update Profile</h2>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <form method="POST" action="{{ route('student.profile.update') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="row g-3">
+            <div class="col-md-4 text-center">
+                <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('default-avatar.png') }}"
+                     alt="Profile Picture"
+                     class="img-thumbnail rounded-circle"
+                     style="width: 120px; height: 120px;">
+                <input type="file" name="profile_picture" class="form-control mt-2">
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control" required>
                 </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" value="{{ Auth::user()->email }}" class="form-control" required>
                 </div>
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="{{ route('student.profile.show') }}" class="btn btn-secondary ms-2">Cancel</a>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </form>
+</div>
+@endsection

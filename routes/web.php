@@ -6,6 +6,27 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StudentProfileController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\PasswordController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+});
+
+//email verification routes
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/email/verification-notification', function () {
+        request()->user()->sendEmailVerificationNotification();
+        return back()->with('status', 'verification-link-sent');
+    })->middleware(['throttle:6,1'])->name('verification.send');
+});
+
+
+Route::match(['PATCH', 'PUT'], '/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -16,12 +37,16 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // dashboard routes
 Route::get('/admin/dashboard', fn() => view('dashboards.admin'))->middleware('auth');
-Route::get('/student/dashboard', fn() => view('dashboards.student'))->middleware('auth');
+Route::get('/student/dashboard', fn() => view('dashboards.student'))->middleware('auth')->name('student.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/student/profile/edit', [StudentProfileController::class, 'edit'])->name('student.profile.edit');
+    Route::get('/student/profile', [StudentProfileController::class, 'show'])->name('student.profile.show');
+    Route::post('/student/profile/update', [StudentProfileController::class, 'update'])->name('student.profile.update');
 });
 
 // Alumni routes
