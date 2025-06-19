@@ -7,7 +7,18 @@
     <p style="color: green">{{ session('success') }}</p>
 @endif
 
-<a href="{{ route('alumni.create') }}">+ Add New Alumni</a>
+
+<a href="{{ route('alumni.create') }}" style="
+    display: inline-block;
+    background-color: #0d6efd;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+">
+    + Add New Alumni
+</a>
 
 <table border="1" cellpadding="10" cellspacing="0" style="margin-top: 20px; width: 100%;">
     <thead>

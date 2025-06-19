@@ -28,7 +28,8 @@
     <input type="text" name="course" value="{{ old('course') }}"><br><br>
 
     <label>Graduation Year:</label><br>
-    <input type="number" name="graduation_year" value="{{ old('graduation_year') }}"><br><br>
+    <input type="date" name="graduation_year" id="graduation_year" value="{{ old('graduation_year') }}">
+<br><br>
 
     <button type="submit">Save</button>
 </form>
