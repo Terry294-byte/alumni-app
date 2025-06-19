@@ -6,7 +6,7 @@ class AlumniSeeder extends Seeder
 {
     public function run()
     {
-        Alumni::factory()->count(10)->create();
+        Alumni::factory()->count(20)->create();
     }
 }
 
