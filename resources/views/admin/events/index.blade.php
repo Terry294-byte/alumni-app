@@ -1,50 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>All Events</h2>
+<div class="d-flex justify-content-between mb-3">
+    <h2>All Events</h2>
+    <a href="{{ route('admin.events.create') }}" class="btn btn-primary">+ Add Event</a>
+</div>
 
 @if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
+    <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
-<a href="{{ route('admin.events.create') }}" style="
-    display: inline-block;
-    background-color: #0d6efd;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-bottom: 15px;
-">
-    + Add New Event
-</a>
-
-<table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($events as $event)
-        <tr>
-            <td>{{ $event->title }}</td>
-            <td>{{ $event->description }}</td>
-            <td>{{ \Carbon\Carbon::parse($event->event_date)->toFormattedDateString() }}</td>
-            <td>{{ $event->location }}</td>
-            <td>
-                <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" onsubmit="return confirm('Delete this event?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" style="color: red;">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+<div class="row">
+    @foreach($events as $event)
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                @if($event->image)
+                    <img src="{{ asset('storage/' . $event->image) }}" class="card-img-top" alt="Event Image">
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title">{{ $event->title }}</h5>
+                    <p class="card-text">{{ $event->description }}</p>
+                    <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($event->event_date)->toFormattedDateString() }}</p>
+                    <p><strong>Location:</strong> {{ $event->location }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" onsubmit="return confirm('Delete this event?');">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
 @endsection
