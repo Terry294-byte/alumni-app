@@ -9,11 +9,11 @@ class AlumniFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->phoneNumber,
-            'course' => $this->faker->randomElement(['Computer Science', 'IT', 'Networking', 'Cybersecurity']),
-            'graduation_year' => $this->faker->year,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'course' => $this->faker->randomElement(['CS', 'IT', 'Networking']),
+            'graduation_year' => $this->faker->year(),
         ];
     }
 }

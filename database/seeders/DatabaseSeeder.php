@@ -14,9 +14,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            AlumniSeeder::class,
+            EventSeeder::class,
+        ]);
+        
+        // Uncomment the line below to seed the users table with 10 users
+        // \App\Models\User::factory(10)->create();
+        // Uncomment the line below to seed the alumni table with 20 alumni records
+        // $this->call(AlumniSeeder::class);
+        // Uncomment the line below to seed the events table with 20 event records
+        // $this->call(EventSeeder::class);
+        // Uncomment the line below to seed the users table with 10 users
+        // \App\Models\User::factory(10)->create();
     }
 }

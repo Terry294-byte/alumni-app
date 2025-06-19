@@ -10,9 +10,9 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph,
+            'description' => $this->faker->paragraph(),
             'event_date' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'location' => $this->faker->city,
+            'location' => $this->faker->city(),
         ];
     }
 }
