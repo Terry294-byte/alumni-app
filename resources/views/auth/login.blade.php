@@ -78,7 +78,7 @@
         </form>
 
         <div class="text-center mt-3">
-            <small class="text-muted">Do not have an account? <a href="#" class="fw-bold">Sign Up</a></small>
+            <small class="text-muted">Do not have an account? <a href="register" class="fw-bold">Sign Up</a></small>
         </div>
     </div>
 </div>

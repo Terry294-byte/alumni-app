@@ -9,7 +9,7 @@
         <a href="{{ route('admin.events.index') }}" class="list-group-item list-group-item-action">
             Manage Events
         </a>
-        <a href="{{ route('admin.alumni.index') }}" class="list-group-item list-group-item-action">
+        <a href="{{ route('alumni.index') }}" class="list-group-item list-group-item-action">
             Manage Alumni
         </a>
         <form method="POST" action="{{ route('logout') }}" class="mt-3">

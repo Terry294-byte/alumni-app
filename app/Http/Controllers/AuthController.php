@@ -18,8 +18,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Redirect based on role
-            $role = Auth::user()->role; // 'admin' or 'student'
+            $role = Auth::user()->role;
 
             if ($role === 'admin') {
                 return redirect('/admin/dashboard');
@@ -41,5 +40,29 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'role' => 'student', // default role
+        ]);
+
+        Auth::login($user);
+        return redirect('/student/dashboard');
     }
 }

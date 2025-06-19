@@ -10,8 +10,11 @@ use App\Http\Controllers\AuthController;
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'showRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
 
-// Dummy dashboard routes
+
+// dashboard routes
 Route::get('/admin/dashboard', fn() => view('dashboards.admin'))->middleware('auth');
 Route::get('/student/dashboard', fn() => view('dashboards.student'))->middleware('auth');
 
@@ -67,5 +70,5 @@ Route::get('/dashboard', function () {
     return view('dashboard'); // or your admin dashboard
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+//require __DIR__.'/auth.php';
 
