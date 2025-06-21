@@ -3,49 +3,67 @@
 @section('content')
 <style>
     body {
-        background: linear-gradient(to right, #9D50BB, #6E48AA);
+        background: #f4f4f4;
     }
+
+    .register-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
     .register-card {
-        border-radius: 15px;
-        padding: 30px;
-        max-width: 400px;
-        margin: auto;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        background-color: #fff;
         position: relative;
+        background-color: #ffffff;
+        padding: 60px 30px 30px; /* extra top padding for avatar */
+        border-radius: 15px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     }
+
     .avatar {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
-        margin: -70px auto 20px;
-        background: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') no-repeat center;
+        background: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') no-repeat center center;
         background-size: cover;
-        border: 4px solid #fff;
+        border: 4px solid white;
         position: absolute;
+        top: -45px;
         left: 50%;
         transform: translateX(-50%);
-        top: 0;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     }
+
     .register-header {
-        margin-top: 60px;
+        margin-top: 20px;
         text-align: center;
     }
+
     .btn-register {
         background-color: #007bff;
         color: #fff;
         border-radius: 50px;
+        font-weight: bold;
     }
+
     .btn-register:hover {
         background-color: #0056b3;
     }
+
+    .form-label {
+        font-weight: 500;
+    }
 </style>
 
-<div class="d-flex justify-content-center align-items-center min-vh-100">
+<div class="register-wrapper">
     <div class="register-card">
         <div class="avatar"></div>
         <div class="register-header">
-            <h4>Sign Up</h4>
+            <h4 class="fw-bold">Sign Up</h4>
             <small class="text-muted">Create your student account</small>
         </div>
 
@@ -82,13 +100,13 @@
                 <input type="password" name="password_confirmation" class="form-control" required>
             </div>
 
-            <div class="d-grid">
+            <div class="d-grid mt-4">
                 <button type="submit" class="btn btn-register">SIGN UP</button>
             </div>
         </form>
 
         <div class="text-center mt-3">
-            <small class="text-muted">Already have an account? <a href="/login" class="fw-bold">Login</a></small>
+            <small class="text-muted">Already have an account? <a href="/login" class="fw-bold text-primary">Login</a></small>
         </div>
     </div>
 </div>

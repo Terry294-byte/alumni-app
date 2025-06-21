@@ -17,10 +17,20 @@
         font-size: 40px;
         color: #007bff;
     }
-    .logout-button {
+    .profile-picture {
         position: absolute;
         top: 20px;
         right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
+    .logout-button {
+        position: absolute;
+        top: 20px;
+        left: 30px;
     }
 </style>
 
@@ -31,6 +41,15 @@
             @csrf
             <button class="btn btn-danger">Logout</button>
         </form>
+    </div>
+
+    <!-- Profile Picture -->
+    <div>
+        @if(Auth::user()->profile_picture)
+            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="profile-picture">
+        @else
+            <img src="{{ asset('default-avatar.png') }}" alt="Default Avatar" class="profile-picture">
+        @endif
     </div>
 
     <!-- Header -->
@@ -77,6 +96,9 @@
         </div>
 
         <!-- Update Profile -->
-<a href="{{ route('student.profile.edit') }}" class="btn btn-primary btn-lg w-100 my-4" style="border-radius: 10px; font-weight: 600; box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);">
-    Update Profile
-</a>
+        <a href="{{ route('student.profile.edit') }}" class="btn btn-primary btn-lg w-100 my-4" style="border-radius: 10px; font-weight: 600; box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);">
+            Update Profile
+        </a>
+    </div>
+</div>
+@endsection

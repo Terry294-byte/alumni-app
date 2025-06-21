@@ -15,7 +15,7 @@
             padding-top: 70px; /* height of navbar */
             padding-bottom: 50px; /* height of footer */
             font-family: Arial, sans-serif;
-            background: #f4f4f4;
+          
         }
 
         .content {
@@ -29,6 +29,8 @@
 </head>
 <body>
     @include('partials.navbar')
+    
+
 
     <div class="content">
         @yield('content')

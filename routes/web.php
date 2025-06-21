@@ -36,7 +36,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 // dashboard routes
-Route::get('/admin/dashboard', fn() => view('dashboards.admin'))->middleware('auth');
+Route::get('/admin/dashboard', fn() => view('dashboards.admin'))->middleware('auth')->name('admin.dashboard');
 Route::get('/student/dashboard', fn() => view('dashboards.student'))->middleware('auth')->name('student.dashboard');
 
 Route::middleware('auth')->group(function () {
