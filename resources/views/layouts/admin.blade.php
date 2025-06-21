@@ -3,8 +3,11 @@
 <head>
     <title>Admin | Alumni Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -21,6 +24,7 @@
             color: white !important;
             margin-right: 20px;
             border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .navbar-admin .nav-link.active,
@@ -30,6 +34,20 @@
 
         .content {
             padding: 20px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .navbar-profile {
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
@@ -46,7 +64,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="adminNavbar">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
@@ -59,6 +77,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </li>
+
+                @auth
+                    <li class="nav-item navbar-profile ms-2">
+                        <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('default-avatar.png') }}" alt="Profile Picture" class="profile-img">
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

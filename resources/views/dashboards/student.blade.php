@@ -95,10 +95,12 @@
             </div>
         </div>
 
-        <!-- Update Profile -->
-        <a href="{{ route('student.profile.edit') }}" class="btn btn-primary btn-lg w-100 my-4" style="border-radius: 10px; font-weight: 600; box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);">
-            Update Profile
-        </a>
-    </div>
+       <!-- Update Profile -->
+<a href="{{ route('student.profile.edit') }}" 
+   class="btn btn-primary btn-sm my-2" 
+   style="border-radius: 8px; font-weight: 500; padding: 6px 14px; font-size: 14px; box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);">
+   Update Profile
+</a>
+
 </div>
 @endsection

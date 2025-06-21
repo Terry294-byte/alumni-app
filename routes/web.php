@@ -94,6 +94,12 @@ Route::get('/contact', function () {
 Route::get('/dashboard', function () {
     return view('dashboard'); // or your admin dashboard
 })->middleware(['auth'])->name('dashboard');
+//job routes
+
+Route::get('/jobs', function () {
+    return view('jobs');
+});
+
 
 //require __DIR__.'/auth.php';
 

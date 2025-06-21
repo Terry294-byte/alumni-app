@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 
-
     <!-- Page Content -->
     <div class="container mt-5 pt-3">
         <div class="dashboard-box">
@@ -14,13 +13,13 @@
                     <i class="bi bi-people-fill me-2"></i> Manage Alumni
                 </a>
             </div>
+           <!-- Update Profile -->
+<a href="{{ route('student.profile.edit') }}" 
+   class="btn btn-primary btn-sm my-2" 
+   style="border-radius: 8px; font-weight: 500; padding: 6px 14px; font-size: 14px; box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);">
+   Update Profile
+</a>
 
-            <div class="mt-4">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-box-arrow-right me-1"></i> Logout
-                    </button>
                 </form>
             </div>
         </div>
