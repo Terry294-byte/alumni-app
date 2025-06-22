@@ -70,6 +70,15 @@
                 Login
             </a>
 
+            <form action="{{ url('/search') }}" method="GET" style="display: flex; align-items: center;">
+                <input type="text" name="query" placeholder="Search..." 
+                       style="padding: 5px 10px; border-radius: 4px 0 0 4px; border: none; outline: none; height: 30px;">
+                <button type="submit" 
+                        style="padding: 5px 10px; border-radius: 0 4px 4px 0; border: none; background: white; color: #0d6efd; cursor: pointer; height: 30px;">
+                    🔍
+                </button>
+            </form>
+
             @auth
                 <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('default-avatar.png') }}"
                      alt="Profile Picture"
