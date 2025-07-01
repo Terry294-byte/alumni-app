@@ -31,6 +31,27 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
+    //edit
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('events.edit', compact('event'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'event_date' => 'required|date',
+            'location' => 'required|string',
+        ]);
+
+        $event = Event::findOrFail($id);
+        $event->update($request->all());
+
+        return redirect()->route('events.index')->with('success', 'Event updated successfully!');
+    }
+    //destroy
 
     public function destroy($id)
     {

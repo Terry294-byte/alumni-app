@@ -96,7 +96,7 @@
         </div>
         <div class="col-md-6 mb-4">
             <div class="card p-4">
-                <h5 class="card-title">Brian K., Founder of TechNext</h5>
+                <h5 class="card-title">Terry K., Founder of TechNext</h5>
                 <p class="card-text">"After graduation, I started my own tech startup. IT College gave me the confidence and the skills to pursue my dream."</p>
             </div>
         </div>

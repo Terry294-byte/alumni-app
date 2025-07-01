@@ -1,101 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin | Alumni Portal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            padding-top: 70px;
-            background-color: #f4f4f4;
-        }
-
-        .navbar-admin {
-            background: linear-gradient(135deg, #000428, #004e92);
-            color: white;
-        }
-
-        .navbar-admin .nav-link {
-            color: white !important;
-            margin-right: 20px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-admin .nav-link.active,
-        .navbar-admin .nav-link:hover {
-            border-bottom: 2px solid white;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid white;
-            margin-left: 15px;
-        }
-
-        .navbar-profile {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg fixed-top navbar-admin shadow">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand text-white fw-bold" href="{{ route('admin.dashboard') }}">
-            🛡️ Admin Dashboard
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon text-white"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="adminNavbar">
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/events*') ? 'active' : '' }}" href="{{ route('admin.events.index') }}">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/alumni*') ? 'active' : '' }}" href="{{ route('alumni.index') }}">Alumni</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                </li>
-
-                @auth
-                    <li class="nav-item navbar-profile ms-2">
-                        <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('default-avatar.png') }}" alt="Profile Picture" class="profile-img">
-                    </li>
-                @endauth
-            </ul>
-        </div>
-    </div>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</nav>
-
-<div class="container content">
-    @yield('content')
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<h5 class="text-center py-4 border-bottom">Admin Panel</h5>
+<a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+</a>
+<a href="{{ route('admin.events.index') }}" class="{{ request()->routeIs('admin.events.*') ? 'active' : '' }}">
+    <i class="bi bi-calendar-event me-2"></i> Events
+</a>
+<a href="{{ route('admin.members.index') }}" class="{{ request()->routeIs('admin.members.*') ? 'active' : '' }}">
+    <i class="bi bi-people me-2"></i> Members
+</a>
+<a href="{{ route('admin.gallery.index') }}" class="{{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}">
+    <i class="bi bi-images me-2"></i> Gallery
+</a>
+<a href="{{ route('admin.about') }}" class="{{ request()->routeIs('admin.about') ? 'active' : '' }}">
+    <i class="bi bi-info-circle me-2"></i> About Us
+</a>
+<a href="{{ route('logout') }}"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>

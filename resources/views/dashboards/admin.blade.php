@@ -1,31 +1,45 @@
 @extends('layouts.admin')
 
-    <!-- Page Content -->
-    <div class="container mt-5 pt-3">
-        <div class="dashboard-box">
-            <h2 class="mb-3">Welcome, {{ Auth::user()->name }} 👋</h2>
+@section('title', 'Super Admin Dashboard')
 
-            <div class="list-group">
-                <a href="{{ route('admin.events.index') }}" class="list-group-item list-group-item-action">
-                    <i class="bi bi-calendar-event me-2"></i> Manage Events
-                </a>
-                <a href="{{ route('alumni.index') }}" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people-fill me-2"></i> Manage Alumni
-                </a>
-            </div>
-           <!-- Update Profile -->
-<a href="{{ route('student.profile.edit') }}" 
-   class="btn btn-primary btn-sm my-2" 
-   style="border-radius: 8px; font-weight: 500; padding: 6px 14px; font-size: 14px; box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);">
-   Update Profile
-</a>
+@section('content')
+<div class="d-flex align-items-center mb-4">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+         alt="Profile" 
+         class="rounded-circle me-3"
+         style="width: 80px; height: 80px; object-fit: cover; border: 3px solid #0d6efd;">
+    <div>
+        <h3 class="mb-0">Welcome, {{ Auth::user()->name }} 👋</h3>
+        <small class="text-muted">Super Admin Panel Overview</small>
+    </div>
+</div>
 
-                </form>
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary"><i class="bi bi-people-fill me-2"></i>Total Users</h5>
+                <h2 class="fw-bold">{{ $totalUsers ?? '0' }}</h2>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-success"><i class="bi bi-star-fill me-2"></i>Total Reviews</h5>
+                <h2 class="fw-bold">{{ $totalReviews ?? '0' }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-warning"><i class="bi bi-person-badge-fill me-2"></i>Total Members</h5>
+                <h2 class="fw-bold">{{ $totalMembers ?? '0' }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
