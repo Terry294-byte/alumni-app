@@ -9,6 +9,20 @@
         font-size: 2.5rem;
         color: #0d6efd;
     }
+    .member-card {
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
+        border-radius: 0.25rem;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .member-card:hover {
+        transform: translateY(-5px);
+    }
+    .member-photo {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
 </style>
 
 <div class="container section">
@@ -31,6 +45,28 @@
             <h5 class="mt-3">Our Values</h5>
             <p>Community, growth, innovation, and giving back to uplift the next generation of tech leaders.</p>
         </div>
+    </div>
+
+    <h3 class="text-center mt-5 mb-4">Our Team</h3>
+    <div class="row">
+        @forelse($members as $member)
+            <div class="col-md-4 mb-4">
+                <div class="member-card">
+                    @if($member->photo)
+                        <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="member-photo">
+                    @else
+                        <img src="{{ asset('images/default-profile.png') }}" alt="Default Profile" class="member-photo">
+                    @endif
+                    <div class="p-3 text-center">
+                        <h5>{{ $member->name }}</h5>
+                        <p class="text-muted mb-1">{{ $member->position }}</p>
+                        <p class="text-muted"><small>{{ $member->email }}</small></p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center">No Team Members to display.</p>
+        @endforelse
     </div>
 
     <div class="text-center mt-5">

@@ -6,7 +6,7 @@ class AdminController extends Controller
 {
 	public function dashboard()
 	{
-		return view('admin.dashboard', [
+		return view('dashboards.admin', [
 			'totalUsers' => \App\Models\User::count(),
 			'totalEvents' => \App\Models\Event::count(),
 			'totalAlumni' => \App\Models\Alumni::count(),

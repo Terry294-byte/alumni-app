@@ -17,7 +17,8 @@
                     <img src="{{ asset('storage/' . $img->image) }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <p class="card-text">{{ $img->caption }}</p>
-                        <form method="POST" action="{{ route('admin.gallery.destroy', $img->id) }}">
+                        <a href="{{ route('admin.gallery.edit', $img->id) }}" class="btn btn-sm btn-primary me-2">Edit</a>
+                        <form method="POST" action="{{ route('admin.gallery.destroy', $img->id) }}" style="display:inline;">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>

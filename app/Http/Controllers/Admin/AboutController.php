@@ -10,6 +10,6 @@ class AboutController extends Controller
 {
     public function index()
     {
-        return view('admin.about');
+        return view('admin.members.index'); // Adjust the view path as needed
     }
 }

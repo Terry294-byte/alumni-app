@@ -8,11 +8,16 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AlumniController;
 
+
+
 // Admin controllers
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\MemberController;
+
 use App\Http\Controllers\Admin\GalleryController;
-use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AlumniController as AdminAlumniController;
+use App\Http\Controllers\Frontend\AboutController;
+
 
 // Home page
 Route::get('/', fn() => view('home'));
@@ -34,9 +39,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Dashboard
+use App\Http\Controllers\Admin\AdminController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
-    Route::get('/admin/dashboard', fn() => view('dashboards.admin'))->name('admin.dashboard');
+    
+
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/student/dashboard', fn() => view('dashboards.student'))->name('student.dashboard');
 });
 
@@ -53,8 +62,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });
 
+
+
 // Public pages
-Route::get('/about', fn() => view('about'));
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', fn() => view('contact'));
 Route::get('/jobs', fn() => view('jobs'));
 
@@ -83,10 +94,21 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::put('/events/{id}', [AdminEventController::class, 'update'])->name('events.update');
     Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
 
-    // Members
-    Route::resource('members', MemberController::class)->except(['show']);
+   
 
-    // In routes/web.php inside the 'admin' group
-Route::get('/about', [AboutController::class, 'index'])->name('about');
+// Members Resource Routes (index, create, store, edit, update, destroy)
+Route::resource('members', MemberController::class)->except(['show']);
+
+# Removed conflicting admin about route to fix view not found error
+# Route::get('/about', [AboutController::class, 'index'])->name('about');
+// Gallery
+   
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
 
 });
